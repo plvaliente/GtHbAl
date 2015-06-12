@@ -128,6 +128,10 @@ descifrar st = decodificar (nRotacion (menorChi2 st) (listaChi2 st (frec st) 25)
 -- me puse a mirar el 7) y lo resolvi, pero como vos ya lo subiste 
 -- lo dejo aca abajo para que lo veas haber cual queda mejor 
 
+-- !AHORA que me fijo bien, praticamente es lo mismo lo que se nos ocurrio! 
+-- pero escrito de otra forma 
+
+
 dlistas :: [Float] -> Integer -> [Float]
 
 dlistas l1 n -- con l1 = (frec st), n = 26 da todas las convinaciones
