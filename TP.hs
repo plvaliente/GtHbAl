@@ -43,6 +43,11 @@ desplazar n a
     | ((letANat a) + n) > 25 = natALet ( (letANat a) + n - 26 )
     | otherwise = natALet ( (letANat a) + n )
  
+desplazar' :: Integer -> Char -> Char
+desplazar' n a 
+    | n > 25 || n < 0 = undefined
+    | not (esMin a) = a
+    | otherwise = natALet (mod ((letANat a) + n) 26) 
  
 cantMinusc :: String -> Integer
 
