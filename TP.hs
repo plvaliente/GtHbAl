@@ -108,8 +108,8 @@ listaChi2 st f n
 	| n < 0 = []
 	| n >= 0 = chi2 (rotar n f) lMasUsadas : (listaChi2 st f (n-1))
 
-minimo :: [Float] -> Float
-minimo (x:xs) 
+minimo :: [Float] -> Float 
+minimo (x:xs)
 	| xs == [] = x
 	| x <= head xs = minimo (x : tail(xs))
 	| x > head xs = minimo (xs)
@@ -125,5 +125,23 @@ nRotacion n l1
 descifrar :: String -> String
 descifrar st = decodificar (nRotacion (menorChi2 st) (listaChi2 st (frec st) 25)) st
 
+-- me puse a mirar el 7) y lo resolvi, pero como vos ya lo subiste 
+-- lo dejo aca abajo para que lo veas haber cual queda mejor 
+
+dlistas :: [Float] -> Integer -> [Float]
+
+dlistas l1 n -- con l1 = (frec st), n = 26 da todas las convinaciones
+    | n == 0 = []
+    | otherwise = chi2 l1 lMasUsadas : dlistas (rotar 1 l1) (n-1)
+
+valDeRot :: Float -> [Float] -> Integer
+
+valDeRot m1 ls  -- con m1 = (minimum (dlistas (frec st) 26)), ls = (dlistas (frec st) 26) te da el valor de rotacion  
+    | m1 == head ls = 0
+    | otherwise = valDeRot m1 (tail ls) + 1
+    
+descifrar2 :: String -> String 
+
+descifrar2 st = decodificar (valDeRot (minimum (dlistas (frec st) 26)) (dlistas (frec st) 26)) st
 
 lMasUsadas = [12.52, 1.42, 4.67, 5.85, 13.67, 0.67, 1.01, 0.70, 6.24, 0.44, 0.01, 4.96, 3.15, 6.70, 8.67, 2.51, 0.88, 6.86, 7.97, 4.62, 3.92, 0.90, 0.02, 0.22, 0.90, 0.52]
