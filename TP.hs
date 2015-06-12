@@ -103,19 +103,13 @@ chi2 l1 l2
      where (x1:xs) = l1
 	   (y1:ys) = l2
 
-listaChi2 :: String -> [Float] -> Int -> [Float]
-listaChi2 st f n
+listaChi2 :: [Float] -> Int -> [Float]
+listaChi2 f n
 	| n < 0 = []
-	| n >= 0 = chi2 (rotar n f) lMasUsadas : (listaChi2 st f (n-1))
-
-minimo :: [Float] -> Float 
-minimo (x:xs)
-	| xs == [] = x
-	| x <= head xs = minimo (x : tail(xs))
-	| x > head xs = minimo (xs)
+	| n >= 0 = chi2 (rotar n f) lMasUsadas : (listaChi2 f (n-1))
 
 menorChi2 :: String -> Float
-menorChi2 st = minimo (listaChi2 st (frec st) 25)
+menorChi2 st = minimum (listaChi2 (frec st) 25)
 
 nRotacion :: Float -> [Float] -> Integer 
 nRotacion n l1 
@@ -123,7 +117,7 @@ nRotacion n l1
     | otherwise = nRotacion n (tail l1) - 1
 
 descifrar :: String -> String
-descifrar st = decodificar (nRotacion (menorChi2 st) (listaChi2 st (frec st) 25)) st
+descifrar st = decodificar (nRotacion (menorChi2 st) (listaChi2 (frec st) 25)) st
 
 -- me puse a mirar el 7) y lo resolvi, pero como vos ya lo subiste 
 -- lo dejo aca abajo para que lo veas haber cual queda mejor 
