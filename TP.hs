@@ -70,7 +70,9 @@ codificar n st
     
 decodificar :: Integer -> String -> String
 
-decodificar n st = codificar (26 - n) st
+decodificar n st 
+    | n == 0 = st
+    | otherwise = codificar (26 - n) st
 
 
 frecLista :: String -> [Char] -> [Float]
@@ -132,6 +134,14 @@ dlistas l1 n -- con l1 = (frec st), n = 26 da todas las convinaciones
     | n == 0 = []
     | otherwise = chi2 l1 lMasUsadas : dlistas (rotar 1 l1) (n-1)
 
+chi2convinaciones :: String -> [Float]     
+
+chi2convinaciones st = dlistas (frec st) 26
+
+minChi2 :: String -> Float
+
+minChi2 st = minimum (chi2convinaciones st)
+
 valDeRot :: Float -> [Float] -> Integer
 
 valDeRot m1 ls  -- con m1 = (minimum (dlistas (frec st) 26)), ls = (dlistas (frec st) 26) te da el valor de rotacion  
@@ -140,6 +150,6 @@ valDeRot m1 ls  -- con m1 = (minimum (dlistas (frec st) 26)), ls = (dlistas (fre
     
 descifrar2 :: String -> String 
 
-descifrar2 st = decodificar (valDeRot (minimum (dlistas (frec st) 26)) (dlistas (frec st) 26)) st
+descifrar2 st = decodificar (valDeRot (minChi2 st) (chi2convinaciones st)) st
 
 lMasUsadas = [12.52, 1.42, 4.67, 5.85, 13.67, 0.67, 1.01, 0.70, 6.24, 0.44, 0.01, 4.96, 3.15, 6.70, 8.67, 2.51, 0.88, 6.86, 7.97, 4.62, 3.92, 0.90, 0.02, 0.22, 0.90, 0.52]
