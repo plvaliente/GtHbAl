@@ -32,9 +32,8 @@ letANat n = nLetra n lLetras
 --
 
 numeL :: Integer -> [Char] -> Char
-numeL n l1 
-    | n == 0 = head l1
-    | otherwise = numeL (n - 1) (tail l1)
+numeL 0 (x:xs) = x
+numeL n (x:xs) = numeL (n-1) xs
 
 natALet :: Integer -> Char
 natALet n = numeL n lLetras
@@ -59,25 +58,20 @@ cantMinusc st
     
 contar :: Char -> String -> Integer
 contar a [] = 0
-contar a st
-    | a == head st = 1 + contar a (tail st)
-    | otherwise = contar a (tail st)
+contar a (x:xs)
+    | a == x = 1 + contar a xs
+    | otherwise = contar a xs
     
 -- Ejercicio 2
 
 codificar :: Integer -> String -> String
-codificar n [] = []  
-codificar n st = desplazar n (head st) : codificar n (tail st)
+codificar n [] = [] 
+codificar n (x:xs) = desplazar n x : codificar n xs
 
 -- Ejercicio 3 
 
-decodificar2 :: Integer -> String -> String
-decodificar2 n [] = []  
-decodificar2 n st = desplazar (-n) (head st) : decodificar2 n (tail st)
-
 decodificar 0 st = st
-decodificar n st 
-    | otherwise = codificar (26 - n) st
+decodificar n st = codificar (26 - n) st 
 
 -- Ejercicio 4
 
