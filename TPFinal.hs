@@ -70,6 +70,7 @@ codificar n (x:xs) = desplazar n x : codificar n xs
 
 -- Ejercicio 3 
 
+decodificar :: Integer -> String -> String
 decodificar 0 st = st
 decodificar n st = codificar (26 - n) st 
 
@@ -87,7 +88,7 @@ frec st = frecLista st lLetras
 
 -- Ejercicio 5 
 
-rotar :: Int -> [a] -> [a]
+rotar :: Integer -> [a] -> [a]
 rotar 0 st = st
 rotar n st
     | n < 0 = rotar ((length st) + n) st
@@ -103,7 +104,7 @@ chi2 l1 l2 = ((x1 - y1)^2)/y1 + chi2 xs ys
 
 -- Ejercicio 7
 
-listaChi2 :: [Float] -> Int -> [Float]
+listaChi2 :: [Float] -> Integer -> [Float]
 listaChi2 f n
 	| n < 0 = []
 	| n >= 0 = chi2 (rotar n f) lMasUsadas : (listaChi2 f (n-1))
