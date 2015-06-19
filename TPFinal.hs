@@ -91,7 +91,7 @@ frec st = frecLista st lLetras
 rotar :: Integer -> [a] -> [a]
 rotar 0 st = st
 rotar n st
-    | n < 0 = rotar ((length st) + n) st
+    | n < 0 = rotar (toInteger (length st) + n) st
     | otherwise = rotar (n-1) (tail st ++ [head st])
     
 -- Ejercicio 6 
