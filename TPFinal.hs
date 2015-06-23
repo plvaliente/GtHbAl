@@ -116,6 +116,7 @@ menorChi2 :: String -> Float
 menorChi2 st = minimum (chi2convinaciones st)
 
 nRotacion :: Float -> [Float] -> Integer 
+nRotacion n []
 nRotacion n l1 
     | n == head l1 = 25
     | otherwise = nRotacion n (tail l1) - 1
